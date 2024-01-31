@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+    crossorigin="anonymous"></script>
+  <title>Agenda de empleados</title>
+</head>
+
+<body>
+
+  <div class="pb-5 m-3 row">
+    <div class="col-12 m-3">
+      <h1 class="text-center mb-5">Agenda de empleados</h1>
+      <hr>
+    </div>
+    <div class="col-4">
+      <div class="col-6">
+        <h3 class="text-center">Formulario de Alta</h3>
+        <form action="post" id="formulario">
+          <label class="form-label" for="dni">Dni: </label>
+          <input class="form-control" type="text" name="dni" id="dni" placeholder="Formato 12345678Z" required>
+          <label class="form-label" for="nombre">Nombre: </label>
+          <input class="form-control" type="text" name="nombre" id="nombre" required>
+          <label class="form-label" for="apellidos">Apellidos: </label>
+          <input class="form-control" type="text" name="apellidos" id="apellidos" required>
+          <label class="form-label" for="direccion">Dirección: </label>
+          <input class="form-control" type="text" name="direccion" id="direccion" required>
+          <label class="form-label" for="telefono">Teléfono: </label>
+          <input class="form-control" type="number" name="telefono" id="telefono" required>
+
+          <!---------------------------------------------------------------------->
+
+
+          <label for="radio" class="form-label mt-3">Tipo de trabajador</label>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="radioBecario" name="radio" value="Becario" checked>Becario
+            <label class="form-check-label" for="radio"></label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="radioParcial" name="radio" value="Parcial">Tiempo Parcial
+            <label class="form-check-label" for="radio"></label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="radioFijo" name="radio" value="Fijo">Fijo
+            <label class="form-check-label"></label>
+          </div>
+
+
+          <!---------------------------------------------------------------------->
+
+
+          <label for="complementos" class="form-label mt-3">Complementos</label>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input check" id="peligrosidad" name="peligrosidad"
+              value="Peligrosidad">
+            <label class="form-check-label" for="check1">Peligrosidad</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input check" id="nocturnidad" name="nocturnidad"
+              value="Nocturnidad">
+            <label class="form-check-label" for="check2">Nocturnidad</label>
+          </div>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input check" id="destino" name="destino" value="Destino">
+            <label class="form-check-label">Destino</label>
+          </div>
+
+
+          <button class="btn btn-success form-control mt-4" type="button" onclick="agregarEmpleado()">Dar de
+            alta</button>
+        </form>
+      </div>
+
+    </div>
+    <div class="col-4">
+
+      <h3>Lista de empleados</h3>
+      <div class="col-9">
+        <select multiple class="form-select" name="lista" id="lista" onchange="mostrarDetallesEmpleado()">
+        </select>
+      </div>
+
+      <div class="col-12">
+        <div class="col-6 mt-4">
+        <form action="post" id="formularioModificacion" hidden>
+          <h3 class="text-center">Modificar empleado</h3>
+            <label class="form-label" for="dni">Dni: </label>
+            <input class="form-control" type="text" name="dni2" id="dni2" readonly>
+            <label class="form-label" for="nombre">Nombre: </label>
+            <input class="form-control" type="text" name="nombre2" id="nombre2" required>
+            <label class="form-label" for="apellidos">Apellidos: </label>
+            <input class="form-control" type="text" name="apellidos2" id="apellidos2" required>
+            <label class="form-label" for="direccion">Dirección: </label>
+            <input class="form-control" type="text" name="direccion2" id="direccion2" required>
+            <label class="form-label" for="telefono">Teléfono: </label>
+            <input class="form-control" type="number" name="telefono2" id="telefono2" required>
+
+             <!---------------------------------------------------------------------->
+
+
+            <label for="radio" class="form-label mt-3">Tipo de trabajador</label>
+            <div class="form-check">  
+                <input type="radio" class="form-check-input" id="radioBecario2" name="radio2" value="Becario" checked>Becario
+                <label class="form-check-label" for="radio"></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="radioParcial2" name="radio2" value="Parcial">Tiempo Parcial
+                <label class="form-check-label" for="radio"></label>
+              </div>
+              <div class="form-check">
+                <input type="radio" class="form-check-input" id="radioFijo2" name="radio2" value="Fijo">Fijo
+                <label class="form-check-label"></label>
+              </div>
+
+
+              <!---------------------------------------------------------------------->
+
+
+              <label for="complementos" class="form-label mt-3">Complementos</label>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input check2" id="peligrosidad2" name="peligrosidad2" value="Peligrosidad">
+                <label class="form-check-label" for="check1">Peligrosidad</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input check2" id="nocturnidad2" name="nocturnidad2" value="Nocturnidad">
+                <label class="form-check-label" for="check2">Nocturnidad</label>
+              </div>
+              <div class="form-check">
+                <input type="checkbox" class="form-check-input check2" id="destino2" name="destino2" value="Destino">
+                <label class="form-check-label">Destino</label>
+              </div>
+
+
+            <button class="btn btn-success form-control mt-4" type="button" id="btnModificar">Modificar</button>
+        </form>
+    </div>
+
+    </div>
+    </div>
+
+    
+    <div class="col-4">
+
+      <h3>Detalles empleado</h3>
+
+      <div class="col-6 mt-3 pt-3 mb-2 pb-2">
+          <h6 id="informacion"></h6>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-3">
+          <button class="btn btn-warning" onclick="modificarEmpleado()">Modificar datos</button>
+        </div>
+        <div class="col-3">
+          <button class="btn btn-danger" onclick="eliminarEmpleado()">Eliminar empleado</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="empleado.js"></script>
+</body>
+
+</html>
